@@ -41,10 +41,10 @@ public class OceanImpl implements Ocean {
 		shipSunk = 0;
 		fleetInitSize = fleet.size();
 	}
-	
+
 	private void admiral(){
 		//Setting the fleet
-		
+
 		fleet = ShipFactory.getInstance().getShips();
 		/*
 		System.out.println("num ret items = " + fleet.size()); // just a test message to show correct num ship being returned
@@ -53,23 +53,23 @@ public class OceanImpl implements Ocean {
 			System.out.println("Type=" + ship.getShipType() + " hit = " + ship);
 		}*/
 	}
-	
+
 	public int getFleetSize(){
 		return fleet.size();
 	}
-	
+
 	private int randInt(int min, int max){
 		// the max is excluded, but the min is included from the random generation 
 		// i.e. call random from 0 to 10 to fill up a grid [0 - 9]
 		Random rand = new Random();
 		return rand.nextInt(max-min);
 	}
-	
+
 	public void placeAllShipsRandomly(){
 		//place all the ships randomly on the initially empty ocean.
 		//Place larger ships before smaller ones to avoid "no legal move"
 		//Use Random class Java.util
-		
+
 		Iterator<ShipInter> it = fleet.iterator();
 		while (it.hasNext()){
 		ShipInter obj = it.next();
@@ -99,14 +99,14 @@ public class OceanImpl implements Ocean {
 		// Saving the grid as String in memento before sinking any ships
 		saveToMemento();
 	}
-	
+
 	public boolean isOccupied(int row, int column){
 		//returns True if the given location contains a ship, false if not
 		ShipInter es = new EmptySea();
 		return(shipArray[row][column].getShipType().equals(es.getShipType()))?false:true;
 		//return(oceanGrid[row][column]=="S" || oceanGrid[row][column]=="x")?true:false;
 	}
-	
+
 	public boolean shootAt(int row, int column){
 		//returns True if given location contains a ship still afloat, false if it does not
 		//returns True if several shot fired at the same location as long as the ship is afloat, false otherwise
@@ -128,40 +128,40 @@ public class OceanImpl implements Ocean {
 			return true;
 		}
 	}
-	
+
 	public int getShotsFired(){
 		//returns the number of shot fired
 		return shotFired;
 	}
-	
+
 	public int getMaxGrid(){
 		return maxGrid;
 	}
-	
+
 	public int getHitCount(){
 		//returns the number of hit recorded (even several shot at the same place)
 		return hitCount;
 	}
-	
+
 	public int getShipsSunk(){
 		//returns the number of ship sunk;
 		shipSunk = fleetInitSize - fleet.size();
 		return shipSunk;
 	}
-	
+
 	public int fleetSize(){
 		return fleet.size();
 	}
-	
+
 	public boolean isGameOver(){
 		return (fleet.isEmpty()); //? true:false;
 	}
-	
+
 	public ShipInter[][] getShipArray(){
 		//returns the grid of ship
 		return shipArray;
 	}
-	
+
 	/*
 	* 	@return the string representing the ocean
 	* 	row number on the left from 0 to 9
@@ -171,12 +171,12 @@ public class OceanImpl implements Ocean {
 	*	x: sunken ship
 	*	.: location that has not been fired at 
 	 */
-	
+
 	@Override
 	public String toString(){
 		String strOcean = "";
-        if(false){//isGameOver()){  @Guilherme <-truncated this to get to results.
-        	strOcean = restoreFromMemento(memento);
+        if(isGameOver()){
+        	strOcean = restoreFromMemento();
         }else{
 			int[] header = {0,1,2,3,4,5,6,7,8,9};
 	        strOcean = "* 0 1 2 3 4 5 6 7 8 9";
@@ -194,7 +194,7 @@ public class OceanImpl implements Ocean {
         }
 		return strOcean;
 	}
-	
+
 	/*private void initOcean(){
 		oceanGrid = new String[maxGrid][maxGrid];
 		for(int i = 0; i<maxGrid-1;i++){
@@ -202,7 +202,7 @@ public class OceanImpl implements Ocean {
 				oceanGrid[i][j]=".";
 		}
 	}*/
-	
+
 	private void initShipArray(){
 		ShipInter es = new EmptySea();
 		for(int i = 0; i<maxGrid;i++){
@@ -210,11 +210,11 @@ public class OceanImpl implements Ocean {
 				setShipArray(es, i, j);
 		}
 	}
-	
+
 	public void setShipArray(ShipInter ship, int row, int column){
 		this.shipArray[row][column]= ship;
 	}
-	
+
 	public ShipInter identifyShip(int row, int column){
 		//TODO Check if it used, if not to be deleted from Interface also !!!!!!!!
 		Iterator<ShipInter> it = fleet.iterator();
@@ -235,24 +235,25 @@ public class OceanImpl implements Ocean {
 		ShipInter es= new EmptySea(); //TODO replace new Emptysea by the actual Emptysea from that location
 		return es;
 	}
-	
+
 	/*
 	 * from here: MEMENTO of the toString()
 	 * restore the grid at the state of beginning before ships being sunk
 	 */
-	
+
 	public static class Memento{
 		private final String ocean;
-		
+
 		private Memento(String oceanOrigin){
 			ocean = oceanOrigin;
+			System.out.println(ocean);
 		}
-		
+
 		private String getSavedGrid(){
 			return ocean;
 		}
 	}
-	
+
 	private void setBeenShotTrue(){
 		for(int i = 0; i<10;i++){
 			for(int j = 0; j<10;j++){
@@ -260,7 +261,7 @@ public class OceanImpl implements Ocean {
 			}
 		}
 	}
-	
+
 	private void setBeenShotFalse(){
 		for(int i = 0; i<10;i++){
 			for(int j = 0; j<10;j++){
@@ -268,17 +269,17 @@ public class OceanImpl implements Ocean {
 			}
 		}
 	}
-	
+
 	public Memento saveToMemento(){
 		setBeenShotTrue();
 		String oceanGrid = toString();
 		setBeenShotFalse();
-		
-		return new Memento(oceanGrid);
+		memento = new Memento(oceanGrid);
+		return memento;
 	}
-	
-	public String restoreFromMemento(Memento memento){
+
+	public String restoreFromMemento(){
 		return memento.getSavedGrid();
 	}
-	
+
 }
