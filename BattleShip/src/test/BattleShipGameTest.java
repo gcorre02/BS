@@ -13,6 +13,7 @@ import static org.mockito.Mockito.when;
 import static org.mockito.Matchers.anyString;
 
 public class BattleShipGameTest {
+	
 	BattleShipGame bsg;
 	UserInterface ui;
 	
@@ -47,6 +48,7 @@ public class BattleShipGameTest {
 			}
 		}
 		shots[0] = "0";
+		when(ui.printToUser(anyString())).thenCallRealMethod();
 		when(ui.getUserAnswer(anyString())).thenReturn('A','B');
 		when(ui.readFromUser()).thenReturn("0",shots);
 		bsg.run();

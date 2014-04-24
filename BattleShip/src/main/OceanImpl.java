@@ -175,7 +175,7 @@ public class OceanImpl implements Ocean {
 	@Override
 	public String toString(){
 		String strOcean = "";
-        if(isGameOver()){
+        if(false){//isGameOver()){  @Guilherme <-truncated this to get to results.
         	strOcean = restoreFromMemento(memento);
         }else{
 			int[] header = {0,1,2,3,4,5,6,7,8,9};

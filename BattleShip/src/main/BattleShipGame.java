@@ -106,6 +106,7 @@ public class BattleShipGame {
     private void closeProgram() {
         printHighestScore();
         ui.printToUser("Thank you for playing, bye.");
+        ui.closeScanner();
     }
 
     /**
