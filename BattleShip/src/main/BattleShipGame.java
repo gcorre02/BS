@@ -205,4 +205,10 @@ public class BattleShipGame {
     public void printFinalScores(){
         ui.printToUser("Your final score is: " + currentScore);
     }
+    /**
+     * method to change the UserInterface, for mocking purposes.
+     */
+    public void setUi(UserInterface ui){
+    	this.ui = ui;
+    }
 }
