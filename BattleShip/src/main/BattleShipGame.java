@@ -152,11 +152,11 @@ public class BattleShipGame {
         boolean target = currentOcean.shootAt(shots[0],shots[1]);
         if(!target){
             ui.printToUser(" WATER! ");
-            //debug
-            System.out.println(currentOcean.identifyShip(shots[0], shots[1]).getShipType());
+            
         }else{
             ui.printToUser("You have hit something");
-            ShipInter shotShip = currentOcean.identifyShip(shots[0],shots[1]);
+            ShipInter shotShip = currentOcean.getShipArray()[shots[0]][shots[1]]; //@Guilherme <- Solved problem created by a call to identifyShip(uses fleet) and not to getShipArray 
+            
             if(shotShip.isSunk()){
                 ui.printToUser("You sunk a " + shotShip.getShipType() + "!");
             }

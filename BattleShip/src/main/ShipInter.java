@@ -97,4 +97,6 @@ public interface ShipInter {
     * @return boolean true if all positions on the ship have been hit
     */
     boolean isSunk();
+    
+   
 }
