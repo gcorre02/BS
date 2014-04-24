@@ -39,7 +39,7 @@ public class BattleShipGame {
      * @param args (convention)
      */
     public static void main(String[] args) {
-        BattleShipGame bsg = new BattleShipGame();
+    	BattleShipGame bsg = new BattleShipGame();
         bsg.run();
     }
 

@@ -10,7 +10,7 @@ public class UserInterface {
     /**
      * method to help mock System.console().readLine().
      *
-     * @return user inputted String.
+     * @return user inputed String.
      */
     public String readFromUser() {
         //TODO improve the regex, to accept most inputs.
@@ -18,7 +18,6 @@ public class UserInterface {
         Scanner ob=new Scanner(System.in);	//added by Ludo
         String input=ob.nextLine();			//added by Ludo
     	//String input = System.console().readLine();
-        
         
         input = input.replaceAll("\"","");
         return input;
