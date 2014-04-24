@@ -194,7 +194,8 @@ public class BattleShipGame {
      *  display the results;
      */
     public void displayResults(){
-        ui.printToUser("You have fired " + currentOcean.getShotsFired() + " so far.");
+    	currentScore = currentOcean.getShotsFired();  //@Guilherme <- Current Score wasn't being updated.
+    	ui.printToUser("You have fired " + currentScore + " so far.");
         ui.printToUser("You have managed a total of " + currentOcean.getHitCount() + " successful hits.") ;
         ui.printToUser("You have sunk a total of " + currentOcean.getShipsSunk() + " ships.");
     }
