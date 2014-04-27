@@ -118,8 +118,9 @@ public class BattleShipGame {
         played = true;
         ui.printToUser("Close the game at any time by inputting letters instead of numbers.");
         currentOcean = new OceanImpl();
+
         currentOcean.placeAllShipsRandomly();
-       
+
         currentScore = 0;
         playTheGame();
         if(currentScore<highestScore

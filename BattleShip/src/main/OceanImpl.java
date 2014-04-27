@@ -97,6 +97,7 @@ public class OceanImpl implements Ocean {
 			//\debug
 		}
 		// Saving the grid as String in memento before sinking any ships
+
 		saveToMemento();
 	}
 
@@ -246,7 +247,7 @@ public class OceanImpl implements Ocean {
 
 		private Memento(String oceanOrigin){
 			ocean = oceanOrigin;
-			System.out.println(ocean);
+			//System.out.println(ocean); debug
 		}
 
 		private String getSavedGrid(){
@@ -271,9 +272,9 @@ public class OceanImpl implements Ocean {
 	}
 
 	public Memento saveToMemento(){
-		setBeenShotTrue();
+        setBeenShotTrue();
 		String oceanGrid = toString();
-		setBeenShotFalse();
+        setBeenShotFalse();
 		memento = new Memento(oceanGrid);
 		return memento;
 	}

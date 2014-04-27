@@ -6,13 +6,13 @@ import java.util.Scanner;
  * Class to handle requests of information from the user.(brought over from a different project (Quiz) by GuilhermeRibeiro)
  */
 public class UserInterface {
-	private Scanner ob;
+//	private Scanner ob;
 	
 	/**
 	 * Instantiates the scanner.	 
 	 * */
 	public UserInterface(){
-		Scanner ob=new Scanner(System.in);	//added by Ludo
+		//ob=new Scanner(System.in);	//added by Ludo
 	}
 	
     /**
@@ -22,8 +22,8 @@ public class UserInterface {
      */
     public String readFromUser() {
         //TODO improve the regex, to accept most inputs.
-        
-        
+
+        Scanner ob=new Scanner(System.in);	//added by Ludo
         String input=ob.nextLine();			//added by Ludo
     	//String input = System.console().readLine();
         
@@ -61,6 +61,6 @@ public class UserInterface {
     }
 
 	public void closeScanner() {
-		ob.close();
+		//ob.close();
 	}
 }
