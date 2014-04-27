@@ -76,4 +76,6 @@ public interface Ocean {
 	 * @return returns fleet size; 
 	 */
 	int getFleetSize();
+
+    void setGameAsOver();
 }

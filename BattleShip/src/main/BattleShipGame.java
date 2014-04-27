@@ -137,8 +137,14 @@ public class BattleShipGame {
             try{
                 shots = takeShots();
             } catch(NumberFormatException e){
+                System.out.println("This is the solution to the game:");
+                currentOcean.setGameAsOver();
+                displayGrid();                  //this shows where all the ships were through the memento
                 throw new UserCancelsException();
             }catch (Exception e){
+                System.out.println("This is the solution to the game:");
+                currentOcean.setGameAsOver();
+                displayGrid();                  //this shows where all the ships were through the memento
                 ui.printToUser("A problem outside of the scope of the user happened.");
                 e.printStackTrace();
                 throw new UserCancelsException();

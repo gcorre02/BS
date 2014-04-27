@@ -58,7 +58,12 @@ public class OceanImpl implements Ocean {
 		return fleet.size();
 	}
 
-	private int randInt(int min, int max){
+    @Override
+    public void setGameAsOver() {
+        fleet.clear();
+    }
+
+    private int randInt(int min, int max){
 		// the max is excluded, but the min is included from the random generation 
 		// i.e. call random from 0 to 10 to fill up a grid [0 - 9]
 		Random rand = new Random();
